@@ -85,7 +85,27 @@ class DataController extends Controller
     return response()->json(['message' => 'Job deleted successfully']);
 }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $jobs = Job::where('title', 'like', "%{$query}%")->get();
+
+        return response()->json($jobs);
+    }
+
+    public function show($id)
+    {
+        $job = Job::with('job_detail')->find($id);
     
+        if (!$job) {
+            return response()->json(['message' => 'Job not found'], 404);
+        }
+    
+        return response()->json($job);
+    }
+    
+
 
     
     }

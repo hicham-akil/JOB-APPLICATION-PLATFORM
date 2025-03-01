@@ -5,8 +5,8 @@ use App\Http\Controllers\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-// Authentication routes
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
@@ -15,15 +15,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'updateProfile']);
 });
 
-// Jobs routes (companies can create multiple jobs)
-Route::middleware('auth:sanctum')->get('/jobs', [DataController::class, 'index']); // Get all jobs
+Route::middleware('auth:sanctum')->get('/jobs', [DataController::class, 'index']); 
+Route::get('/jobs/search', [DataController::class, 'search']);
+Route::get('/jobs/{id}', [DataController::class, 'show']);
 Route::get('/companies/{companyId}/jobs', [DataController::class, 'getCompanyJobs']);
-Route::middleware('auth:sanctum')->post('/jobs', [DataController::class, 'store']); // Create a new job (company can create multiple)
+Route::middleware('auth:sanctum')->post('/jobs', [DataController::class, 'store']); 
 Route::get('/users/{userId}/jobs', [DataController::class, 'getJobsByUser']);
 Route::delete('/jobs/{job}', [DataController::class, 'destroy']);
 
 Route::get('/users/{id}', [ProfileController::class, 'getUserProfile']); 
-// Application routes
 
 Route::middleware('auth:sanctum')->post('/applications', [ApplicationController::class, 'store']); // Apply for a job
 Route::middleware('auth:sanctum')->get('/applications/{jobId}', [ApplicationController::class, 'index']); // Get applications for a specific job

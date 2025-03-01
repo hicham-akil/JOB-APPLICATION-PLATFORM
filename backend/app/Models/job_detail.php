@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class job_detail extends Model
 {
     use HasFactory;
-
+    protected $table = 'job_details'; 
     protected $fillable = [
         'job_id',
         'requirements',
@@ -18,9 +18,8 @@ class job_detail extends Model
         'how_to_apply',
     ];
 
-    // Define the relationship with Job
     public function job()
     {
-        return $this->belongsTo(Job::class);
+      return $this->belongsTo(Job::class, 'job_id');
     }
 }

@@ -14,13 +14,15 @@ class Job extends Model
         'user_id', 'title', 'description', 'location', 'type', 'salary'
     ];
 
-    // Relationship: A job belongs to a company (user)
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+    public function job_detail()
+    {
+        return $this->hasOne(job_detail::class, 'job_id'); 
+    }
 
-    // Relationship: A job can have multiple applications
     public function applications(): HasMany
     {
         return $this->hasMany(Application::class);

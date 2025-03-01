@@ -10,17 +10,20 @@ import JobForm from "./component/JobForm";
 import ApplicationsPage from "./component/ApplicationsPage";
 import JobOfferDetails from "./component/JobOfferDetails";
 import AppInfo from "./component/Staticomp";
-
+import JobSearch from "./component/Search";
+import JobDetails from "./component/Showspjob";
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<>
+        <JobSearch/>
         <AppInfo></AppInfo>
         <Page1></Page1>
         </>} />
         <Route path="/jobform" element={<JobForm />} />
+        <Route path="/jobs/:id" element={<JobDetails/>} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/applications" element={<ApplicationsPage />} />
         <Route path="/job/:jobId/details" element={<JobOfferDetails />} />

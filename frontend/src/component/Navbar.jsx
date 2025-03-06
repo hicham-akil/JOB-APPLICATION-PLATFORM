@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaEnvelope } from "react-icons/fa";
-import ApplicationNotification from "./ApplicationNotification"; // Import the component
+import ApplicationNotification from "./ApplicationNotification"; 
 
 export default function Navbar() {
   const [user, setUser] = useState(null);

@@ -6,7 +6,6 @@ const ApplyForm = ({ jobId }) => {
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState("");
 
-    // Load user details from localStorage
     const [formData, setFormData] = useState({
         name: "",
         prenom: "",
@@ -110,7 +109,6 @@ const ApplyForm = ({ jobId }) => {
                                 </div>
                             )}
 
-                            {/* Step 2: Job Details */}
                             {step === 2 && (
                                 <div>
                                     <h3 className="text-lg font-semibold mb-3">Job Details</h3>
@@ -122,7 +120,6 @@ const ApplyForm = ({ jobId }) => {
                                 </div>
                             )}
 
-                            {/* Step 3: Attachments & Links */}
                             {step === 3 && (
                                 <div>
                                     <h3 className="text-lg font-semibold mb-3">Attachments & Links</h3>
@@ -134,7 +131,6 @@ const ApplyForm = ({ jobId }) => {
                                 </div>
                             )}
 
-                            {/* Step 4: Review & Submit */}
                             {step === 4 && (
                                 <div>
                                     <h3 className="text-lg font-semibold mb-3">Review & Submit</h3>
@@ -147,7 +143,6 @@ const ApplyForm = ({ jobId }) => {
                                 </div>
                             )}
 
-                            {/* Navigation Buttons */}
                             <div className="flex justify-between mt-4">
                                 {step > 1 && <button type="button" onClick={() => setStep(step - 1)} className="bg-gray-400 text-white px-4 py-2 rounded">Previous</button>}
                                 {step < 4 && <button type="button" onClick={() => setStep(step + 1)} className="bg-blue-500 text-white px-4 py-2 rounded">Next</button>}

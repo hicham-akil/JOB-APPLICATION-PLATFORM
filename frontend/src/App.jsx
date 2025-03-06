@@ -12,17 +12,21 @@ import JobOfferDetails from "./component/JobOfferDetails";
 import AppInfo from "./component/Staticomp";
 import JobSearch from "./component/Search";
 import JobDetails from "./component/Showspjob";
+import HomePage from "./component/Home";
+import Footer from "./component/Footer";
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<>
-        <JobSearch/>
+        <HomePage/>
         <AppInfo></AppInfo>
         <Page1></Page1>
+        <Footer></Footer>
         </>} />
         <Route path="/jobform" element={<JobForm />} />
+
         <Route path="/jobs/:id" element={<JobDetails/>} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/applications" element={<ApplicationsPage />} />

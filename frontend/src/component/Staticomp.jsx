@@ -19,7 +19,6 @@ const AppInfo = () => {
     <div
       className="min-h-screen flex justify-center items-center bg-cover bg-center p-6"
       style={{
-        // backgroundImage: `url(${image1})`, 
       }}
     >
       <div className=" bg-opacity-50 w-full h-full flex justify-center items-center p-6">

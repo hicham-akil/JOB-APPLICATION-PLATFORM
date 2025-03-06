@@ -92,7 +92,7 @@ const Page1 = () => {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 2 }} // Increased duration for slower animation
+                    transition={{ duration: 2 }} 
                 >
                     <h2 className="text-3xl font-bold text-center mb-6">Your Posted Jobs</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -103,7 +103,7 @@ const Page1 = () => {
                                     className="bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out p-6"
                                     initial={{ opacity: 0 }}
                                     whileInView={{ opacity: 1 }}
-                                    transition={{ duration: 2 }} // Slower animation for job items
+                                    transition={{ duration: 2 }} 
                                 >
                                     <h3 className="text-xl font-semibold mb-2">{job.title}</h3>
                                     <p className="text-gray-600 mb-4">{job.description}</p>

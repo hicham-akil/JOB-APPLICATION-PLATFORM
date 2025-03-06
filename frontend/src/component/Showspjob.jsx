@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import ApplyForm from './Applylogic';
 
 const JobDetail = () => {
-  const { id } = useParams(); // Get the job ID from the URL params
+  const { id } = useParams(); 
   const [job, setJob] = useState(null);
   const [jobDetail, setJobDetail] = useState(null);
-  const [showApplyForm, setShowApplyForm] = useState(false); // State to toggle ApplyForm
+  const [showApplyForm, setShowApplyForm] = useState(false); 
 
   useEffect(() => {
     // Fetch job data
@@ -46,7 +46,6 @@ const JobDetail = () => {
         </div>
       )}
 
-      {/* Apply Button */}
       <button
         onClick={() => setShowApplyForm(true)} 
         className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"

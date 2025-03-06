@@ -37,3 +37,6 @@ Route::middleware('auth:sanctum')->post('/applications/count', [ApplicationContr
 
 Route::middleware('auth:sanctum')->post('/applications/details', [ApplicationController::class, 'getUserApplications']);
 Route::get('/jobs/{jobId}/details', [ApplicationController::class, 'getJobDetails']);
+
+
+Route::post('conversations', [ConversationController::class, 'store']);

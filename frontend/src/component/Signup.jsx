@@ -7,15 +7,16 @@ function SignUp() {
     firstName: '',
     lastName: '',
     age: '',
-    role: 'student', // default role
+    role: 'student',
     schoolOrCompanyName: '',
     email: '',
     password: '',
     password_confirmation: '',
   });
 
-  const [step, setStep] = useState(1); // Step tracker
+  const [step, setStep] = useState(1);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -39,20 +40,21 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
-    // Front-end validation
+    setLoading(true);
+
     if (!formData.firstName || !formData.lastName || !formData.age || !formData.schoolOrCompanyName || !formData.email || !formData.password || !formData.password_confirmation) {
       setError("All fields are required!");
+      setLoading(false);
       return;
     }
 
     try {
-      // Post request with formData
-      await axios.post('http://127.0.0.1:8000/api/register', formData); // Keep the same API endpoint
+      await axios.post('http://127.0.0.1:8000/api/register', formData);
       alert('User registered successfully');
-      navigate('/signin'); // Redirect to login page
+      navigate('/signin');
     } catch (err) {
       setError(err.response?.data?.errors || 'Something went wrong');
+      setLoading(false);
     }
   };
 
@@ -62,7 +64,6 @@ function SignUp() {
       {error && <p className="text-red-500 mb-4">{typeof error === 'object' ? JSON.stringify(error) : error}</p>}
       
       <form onSubmit={step === 3 ? handleSubmit : handleNext} className="space-y-4">
-        {/* Step 1: Name */}
         {step === 1 && (
           <>
             <div>
@@ -88,7 +89,6 @@ function SignUp() {
           </>
         )}
 
-        {/* Step 2: Age and Role */}
         {step === 2 && (
           <>
             <div>
@@ -112,7 +112,6 @@ function SignUp() {
                 <option value="company">Company</option>
               </select>
             </div>
-
             <div>
               <input
                 type="text"
@@ -126,7 +125,6 @@ function SignUp() {
           </>
         )}
 
-        {/* Step 3: Email and Password */}
         {step === 3 && (
           <>
             <div>
@@ -162,12 +160,31 @@ function SignUp() {
           </>
         )}
 
-        {/* Step Buttons */}
         <button 
           type="submit"
           className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition"
+          disabled={loading}
         >
-          {step === 3 ? 'Sign Up' : 'Next'}
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <svg
+                className="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                ></path>
+              </svg>
+              <span className="ml-2">Signing Up...</span>
+            </div>
+          ) : (
+            step === 3 ? 'Sign Up' : 'Next'
+          )}
         </button>
       </form>
     </div>

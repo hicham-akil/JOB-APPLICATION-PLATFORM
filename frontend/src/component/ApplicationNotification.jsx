@@ -7,7 +7,7 @@ const ApplicationNotification = () => {
   const [rejectedCount, setRejectedCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // 👈 Navigation hook
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchApplicationCounts = async () => {
@@ -39,16 +39,15 @@ const ApplicationNotification = () => {
     fetchApplicationCounts();
   }, []);
 
-  // Navigate to the new page
   const handleClick = () => {
-    navigate("/applications"); // 👈 Redirect to applications page
+    navigate("/applications"); 
   };
 
   return (
     <div className="fixed top-4 right-4">
       <button
         className="relative bg-blue-500 text-white px-4 py-2 rounded-md shadow-md"
-        onClick={handleClick} // 👈 Click event added
+        onClick={handleClick} 
       >
         Applications
         {(acceptedCount > 0 || rejectedCount > 0) && (

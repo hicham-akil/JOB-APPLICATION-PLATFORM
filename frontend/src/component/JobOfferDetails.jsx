@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const JobOfferDetails = () => {
-  const { jobId } = useParams(); // Get job ID from URL
+  const { jobId } = useParams(); 
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [jobDetails, setJobDetails] = useState(null);
@@ -17,7 +17,7 @@ const JobOfferDetails = () => {
 
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/jobs/${jobId}/details`, // API route
+          `http://127.0.0.1:8000/api/jobs/${jobId}/details`, 
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

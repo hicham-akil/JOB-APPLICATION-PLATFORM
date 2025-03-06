@@ -21,8 +21,8 @@
               setBio(response.data.profile.bio || "");
               if (response.data.profile.profile_picture) {
                 const profilePicUrl = `http://127.0.0.1:8000/storage/${response.data.profile.profile_picture}`;
-                localStorage.setItem("profilePicture", profilePicUrl); // Store the correct URL
-                setPreview(profilePicUrl); // Update preview
+                localStorage.setItem("profilePicture", profilePicUrl); 
+                setPreview(profilePicUrl);
               }
             }
           })
@@ -58,7 +58,6 @@
             );
             setMessage(response.data.message);
     
-            // Store the profile picture URL (assuming response contains the URL of the updated profile picture)
             if (response.data.profile.profile_picture) {
                 const profilePicUrl = `http://127.0.0.1:8000/storage/${response.data.profile.profile_picture}`;
                 localStorage.setItem("profilePicture", profilePicUrl);

@@ -22,21 +22,21 @@ const JobSearch = () => {
     };
 
     const handleSelectJob = (id) => {
-        navigate(`/jobs/${id}`); // Navigate to job details page
+        navigate(`/jobs/${id}`);
     };
 
     return (
-        <div className="p-4 relative">
+        <div className="p-4 relative flex justify-center items-center">
             <input
                 type="text"
                 placeholder="Search for a job..."
                 value={query}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="border p-2 rounded w-64"
+                className="border p-2 rounded w-full max-w-xs sm:max-w-md lg:max-w-lg"
             />
 
             {jobs.length > 0 && (
-                <ul className="absolute bg-white border w-64 mt-1 rounded shadow-lg">
+                <ul className="absolute bg-white border w-full max-w-xs sm:max-w-md lg:max-w-lg mt-1 rounded shadow-lg">
                     {jobs.map((job) => (
                         <li
                             key={job.id}

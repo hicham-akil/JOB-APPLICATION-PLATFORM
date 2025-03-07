@@ -9,6 +9,10 @@ const JobForm = () => {
         location: "",
         type: "",
         salary: "",
+        requirements: "",
+        responsibilities: "",
+        company_website: "",
+        company_values: "",
     });
     const [message, setMessage] = useState("");
 
@@ -43,6 +47,10 @@ const JobForm = () => {
                 location: "",
                 type: "",
                 salary: "",
+                requirements: "",
+                responsibilities: "",
+                company_website: "",
+                company_values: "",
             });
         } catch (error) {
             setMessage(error.response?.data?.message || "Failed to post job.");
@@ -60,61 +68,20 @@ const JobForm = () => {
                 <h2 className="text-2xl font-bold text-center mb-4 text-blue-600">Post a Job</h2>
 
                 <form onSubmit={handleSubmitJob} className="space-y-4">
-                    <motion.input
-                        type="text"
-                        placeholder="Title"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                    />
-                    <motion.input
-                        type="text"
-                        placeholder="Description"
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                    />
-                    <motion.input
-                        type="text"
-                        placeholder="Location"
-                        name="location"
-                        value={formData.location}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                    />
-                    <motion.input
-                        type="text"
-                        placeholder="Type (e.g., Full-time, Part-time)"
-                        name="type"
-                        value={formData.type}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                    />
-                    <motion.input
-                        type="number"
-                        placeholder="Salary"
-                        name="salary"
-                        value={formData.salary}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                    />
+                    {Object.keys(formData).map((key) => (
+                        <motion.input
+                            key={key}
+                            type={key === "salary" ? "number" : "text"}
+                            placeholder={key.replace("_", " ").toUpperCase()}
+                            name={key}
+                            value={formData[key]}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        />
+                    ))}
                     <motion.button
                         type="submit"
                         className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

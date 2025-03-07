@@ -33,6 +33,16 @@ use Illuminate\Support\Facades\Storage;
 
     return response()->json(['message' => 'Application submitted successfully!', 'application' => $application], 201);
 }
+public function deleteaply($jobid){
+    $user=Auth::user();
+    $userId = $user->id;
+    $deleted=application::where(user_id,$userId )->where(job_id,$jobId)->delete();
+    if ($deleted) {
+        return response()->json(['message' => 'Application deleted successfully'], 200);
+    } else {
+        return response()->json(['message' => 'No application found'], 404);
+    }
+}
 
 
     public function index($jobId)

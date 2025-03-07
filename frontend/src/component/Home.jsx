@@ -5,9 +5,11 @@ const HomePage = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <JobSearch />
-            <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Welcome to JobFinder</h1>
+            <h1 className="text-3xl font-bold text-center mb-6 text-gray-800 animate-fade-in">
+                Welcome to JobFinder
+            </h1>
 
-            <section className="text-center mb-8">
+            <section className="text-center mb-8 animate-fade-in">
                 <p className="text-lg mb-4 text-gray-700">
                     Your one-stop solution for finding the best jobs in the industry. Search, apply, and take the next step in your career.
                 </p>
@@ -16,7 +18,7 @@ const HomePage = () => {
                 </p>
             </section>
 
-            <section className="bg-blue-50 p-6 rounded-lg shadow-lg mb-8">
+            <section className="bg-blue-50 p-6 rounded-lg shadow-lg mb-8 animate-bounce-in">
                 <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">How It Works</h2>
                 <div className="flex flex-col md:flex-row justify-center gap-8">
                     <div className="text-center">

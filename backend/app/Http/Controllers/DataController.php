@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\job_detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -42,29 +43,57 @@ class DataController extends Controller
     
     public function getJobsByUser($userId)
     {
-        // Assuming your jobs table has a `user_id` column
         $jobs = Job::where('user_id', $userId)->get();
         return response()->json($jobs);
     }
     
     public function store(Request $request)
     {
-        Log::info('🔍 Received job data:', $request->all()); 
+        if (!Auth::check()) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+    
+        $user = Auth::user();
+        if ($user->role !== 'company') {
+            return response()->json(['message' => 'Only companies can post jobs'], 403);
+        }
+    
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
             'type' => 'required|string',
             'salary' => 'required|numeric',
-            'user_id' => 'required|exists:users,id',
+            'requirements' => 'nullable|string',
+            'responsibilities' => 'nullable|string',
+            'company_website' => 'nullable|url',
+            'company_values' => 'nullable|string',
         ]);
     
-        $job = Job::create($request->all());
+        try {
+            $job = Job::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'location' => $request->location,
+                'type' => $request->type,
+                'salary' => $request->salary,
+                'user_id' => $user->id,
+            ]);
     
-        Log::info('✅ Job created:', $job->toArray()); // Log success
+            job_detail::create([
+                'job_id' => $job->id,
+                'requirements' => $request->requirements,
+                'responsibilities' => $request->responsibilities,
+                'company_website' => $request->company_website,
+                'company_values' => $request->company_values,
+            ]);
     
-        return response()->json($job, 201);
+            return response()->json(['message' => 'Job posted successfully!', 'job' => $job], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to post job.'], 500);
+        }
     }
+    
     public function getCompanyJobs($companyId)
     {
         $jobs = Job::where('user_id', $companyId)

@@ -1,11 +1,22 @@
 import React from "react";
 import Applylogic from "./Applylogic";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const JobList = ({ jobs, userApplications }) => {
     const isApplied = (jobId) => {
         return userApplications.some(application => application.job_id === jobId);
     };
+    const deleteapply= async($jobId)=>{
+    
+      const resp=axios.post(`http://127.0.0.1:8000/api/applications/{$jobId}/delete`);
+        if(resp.status===200){
+            consol.log('goodd')
+        }else{
+            consol.log('bad')
+        }
+      
+    }
 
     return (
         <div className="w-full max-w-6xl bg-     p-6 rounded-lg shadow-lg space-y-8">
@@ -33,6 +44,7 @@ const JobList = ({ jobs, userApplications }) => {
                             ) : (
                                 <Applylogic jobId={job.id} />
                             )}
+                            <button onClick={()=>deleteapply(job.id)}></button>
                         </motion.div>
                     ))}
                 </div>

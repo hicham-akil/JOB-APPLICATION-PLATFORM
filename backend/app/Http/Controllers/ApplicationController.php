@@ -33,16 +33,25 @@ use Illuminate\Support\Facades\Storage;
 
     return response()->json(['message' => 'Application submitted successfully!', 'application' => $application], 201);
 }
-public function deleteaply($jobid){
-    $user=Auth::user();
-    $userId = $user->id;
-    $deleted=application::where(user_id,$userId )->where(job_id,$jobId)->delete();
-    if ($deleted) {
+public function deleteaply($jobId)
+{
+    try {
+        $application = Application::where('job_id', $jobId)
+                                  ->where('user_id', auth()->id())
+                                  ->first();
+
+        if (!$application) {
+            return response()->json(['error' => 'Application not found'], 404);
+        }
+
+        $application->delete();
+
         return response()->json(['message' => 'Application deleted successfully'], 200);
-    } else {
-        return response()->json(['message' => 'No application found'], 404);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+
 
 
     public function index($jobId)

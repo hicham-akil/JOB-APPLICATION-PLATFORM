@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import ApplyForm from './Applylogic';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import ApplyForm from "./Applylogic";
+import { motion } from "framer-motion";
 
 const JobDetail = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [job, setJob] = useState(null);
   const [jobDetail, setJobDetail] = useState(null);
-  const [showApplyForm, setShowApplyForm] = useState(false); 
+
+ 
 
   useEffect(() => {
-    // Fetch job data
     const fetchJobData = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/jobs/${id}`);
         setJob(response.data);
+
         setJobDetail(response.data.job_detail);
       } catch (error) {
         console.error("Error fetching job details:", error);
@@ -25,36 +27,78 @@ const JobDetail = () => {
   }, [id]);
 
   if (!job) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-lg font-semibold text-gray-700 animate-pulse">
+          Loading job details...
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>{job.title}</h1>
-      <p><strong>Description:</strong> {job.description}</p>
-      <p><strong>Location:</strong> {job.location}</p>
-      <p><strong>Type:</strong> {job.type}</p>
-      <p><strong>Salary:</strong> {job.salary}</p>
-      
-      <h2>Job Details</h2>
+    <motion.div
+      className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h1 className="text-3xl font-bold text-blue-600 mb-4">{job.title}</h1>
+      <p className="text-gray-700 mb-2">
+        <strong>Description:</strong> {job.description}
+      </p>
+      <p className="text-gray-700">
+        <strong>Location:</strong> {job.location}
+      </p>
+      <p className="text-gray-700">
+        <strong>Type:</strong> {job.type}
+      </p>
+      <p className="text-gray-700">
+        <strong>Salary:</strong> ${job.salary}
+      </p>
+
       {jobDetail && (
-        <div>
-          <p><strong>Requirements:</strong> {jobDetail.requirements}</p>
-          <p><strong>Responsibilities:</strong> {jobDetail.responsibilities}</p>
-          <p><strong>Company Website:</strong> <a href={jobDetail.company_website} target="_blank" rel="noopener noreferrer">{jobDetail.company_website}</a></p>
-          <p><strong>Company Values:</strong> {jobDetail.company_values}</p>
-        </div>
+        <motion.div
+          className="mt-6 p-6 bg-gray-100 rounded-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Job Details
+          </h2>
+          <p className="text-gray-700">
+            <strong>Requirements:</strong> {jobDetail.requirements}
+          </p>
+          <p className="text-gray-700">
+            <strong>Responsibilities:</strong> {jobDetail.responsibilities}
+          </p>
+          <p className="text-gray-700">
+            <strong>Company Website:</strong>{" "}
+            <a
+              href={jobDetail.company_website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              {jobDetail.company_website}
+            </a>
+          </p>
+          <p className="text-gray-700">
+            <strong>Company Values:</strong> {jobDetail.company_values}
+          </p>
+        </motion.div>
       )}
 
-      <button
-        onClick={() => setShowApplyForm(true)} 
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+      <motion.div
+        className="mt-6 flex justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
-        Apply Now
-      </button>
-
-      {showApplyForm && <ApplyForm jobId={id}></ApplyForm>}
-    </div>
+        <ApplyForm jobId={id} />
+      </motion.div>
+    </motion.div>
   );
 };
 

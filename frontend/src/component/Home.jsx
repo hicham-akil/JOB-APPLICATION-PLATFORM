@@ -1,42 +1,52 @@
-import React from "react";
-import JobSearch from "./Search";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; 
+import Main from "../images/Main.jpg";  
+import { FaArrowRight } from "react-icons/fa"; 
 
 const HomePage = () => {
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <JobSearch />
-            <h1 className="text-3xl font-bold text-center mb-6 text-gray-800 animate-fade-in">
-                Welcome to JobFinder
-            </h1>
+  const text = "Your Dream Job is Waiting for You";
+  const words = text.split(" "); 
 
-            <section className="text-center mb-8 animate-fade-in">
-                <p className="text-lg mb-4 text-gray-700">
-                    Your one-stop solution for finding the best jobs in the industry. Search, apply, and take the next step in your career.
-                </p>
-                <p className="text-md text-gray-600">
-                    Whether you are looking for full-time, part-time, or remote work, we have something for everyone. Explore job listings from top companies around the world.
-                </p>
-            </section>
+  const [visibleWords, setVisibleWords] = useState([]);
 
-            <section className="bg-blue-50 p-6 rounded-lg shadow-lg mb-8 animate-bounce-in">
-                <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">How It Works</h2>
-                <div className="flex flex-col md:flex-row justify-center gap-8">
-                    <div className="text-center">
-                        <h3 className="text-xl font-semibold text-gray-800">Step 1</h3>
-                        <p className="mt-2 text-gray-600">Search for jobs by title, location, or company.</p>
-                    </div>
-                    <div className="text-center">
-                        <h3 className="text-xl font-semibold text-gray-800">Step 2</h3>
-                        <p className="mt-2 text-gray-600">Apply to your desired jobs with just a few clicks.</p>
-                    </div>
-                    <div className="text-center">
-                        <h3 className="text-xl font-semibold text-gray-800">Step 3</h3>
-                        <p className="mt-2 text-gray-600">Get hired! Start your new career today.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
+  useEffect(() => {
+    words.forEach((word, index) => {
+      setTimeout(() => {
+        setVisibleWords((prev) => [...prev, word]); 
+      }, index * 500);
+    });
+  }, []);
+
+  return (
+    <div
+      className="relative w-full h-screen bg-cover bg-center flex flex-col justify-center items-center text-white"
+      style={{ backgroundImage: `url(${Main})` }}
+    >
+      <h1 className="text-4xl text-blue-500 font-bold text-center mb-6">
+        {visibleWords.map((word, index) => (
+          <motion.span
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mr-2 inline-block"
+          >
+            {word}
+          </motion.span>
+        ))}
+      </h1>
+
+      <Link
+        to="/Firstpage"
+        className="flex items-center  text-white px-6 py-3 rounded-lg text-lg font-semibold transition-transform transform hover:scale-105"
+        aria-label="Go to application page"
+      >
+        <span className="text-2xl">Let's Go to Apply</span>
+        <FaArrowRight className="ml-2 animate-bounce" />
+      </Link>
+    </div>
+  );
 };
 
 export default HomePage;

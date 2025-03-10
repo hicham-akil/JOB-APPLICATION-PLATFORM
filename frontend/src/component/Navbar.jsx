@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaEnvelope } from "react-icons/fa";
 import ApplicationNotification from "./ApplicationNotification"; 
+import JobSearch from "./Search";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -44,32 +45,34 @@ export default function Navbar() {
 
   if (loading) {
     return (
-      <nav className="bg-blue-600 text-white shadow-md">
+      <nav className="bg-blue-200 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="text-2xl font-bold">
-              MyApp
+              Inhicham
             </Link>
             <span>Loading...</span>
           </div>
         </div>
+
       </nav>
     );
   }
 
   return (
-    <nav className="bg-blue-600 text-white shadow-md">
+    <nav className="bg-blue-200 text-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-2xl font-bold">
-            MyApp
+          <Link to="/" className="text-3xl text-blue-300 font-bold">
+            Inhicham
           </Link>
+          <JobSearch />
 
           <div className="hidden md:flex space-x-6">
-            <Link to="/" className="hover:text-gray-300">Home</Link>
-            <Link to="/profile" className="hover:text-gray-300">Profile</Link>
-            <Link to="/signin" className="hover:text-gray-300">Sign In</Link>
-            <Link to="/signup" className="hover:text-gray-300">Sign Up</Link>
+            <Link to="/" className="hover:text-gray-300 text-xl">Home</Link>
+            <Link to="/profile" className=" text-xl hover:text-gray-300">Profile</Link>
+            <Link to="/signin" className=" text-xl hover:text-gray-300">Sign In</Link>
+            <Link to="/signup" className=" text-xl hover:text-gray-300">Sign Up</Link>
           </div>
 
           {role === "company" && (
@@ -78,7 +81,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Display ApplicationNotification only for students */}
           {role === "student" && <ApplicationNotification />}
 
           {user && (

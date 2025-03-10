@@ -53,7 +53,7 @@ const JobOfferDetails = () => {
           <p className="text-gray-700">Salary: ${job.salary || "Not specified"}</p>
           <p className="mt-4">{job.description}</p>
 
-          {/* Display Job Details */}
+        
           {jobDetails && (
             <div className="mt-4 p-4 border rounded bg-gray-100">
               <h3 className="font-semibold">Additional Details</h3>

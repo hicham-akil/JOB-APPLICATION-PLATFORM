@@ -14,6 +14,8 @@ import JobSearch from "./component/Search";
 import JobDetails from "./component/Showspjob";
 import HomePage from "./component/Home";
 import Footer from "./component/Footer";
+import bgpc from "./images/bagpc.jpeg";  
+
 function App() {
   return (
     <>
@@ -21,10 +23,17 @@ function App() {
       <Routes>
         <Route path="/" element={<>
         <HomePage/>
-        <AppInfo></AppInfo>
-        <Page1></Page1>
-        <Footer></Footer>
+       
         </>} />
+        <Route path="/Firstpage" element={  <div 
+      className="relative w-full min-h-screen bg-cover bg-center text-white" 
+      style={{ backgroundImage: `url(${bgpc})` }}
+    >
+      <AppInfo />
+      <Page1 />
+      <Footer />
+    </div>} />
+
         <Route path="/jobform" element={<JobForm />} />
 
         <Route path="/jobs/:id" element={<JobDetails/>} />

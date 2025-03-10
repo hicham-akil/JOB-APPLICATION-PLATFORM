@@ -27,7 +27,7 @@ Route::get('/users/{id}', [ProfileController::class, 'getUserProfile']);
 
 Route::middleware('auth:sanctum')->post('/applications', [ApplicationController::class, 'store']); 
 Route::middleware('auth:sanctum')->get('/applications/{jobId}', [ApplicationController::class, 'index']); 
-Route::middleware('auth:sanctum')->get('/applications/{jobId}/delete', [ApplicationController::class, 'deleteaply']); 
+Route::middleware('auth:sanctum')->delete('/applications/{jobId}/delete', [ApplicationController::class, 'deleteaply']); 
 Route::middleware('auth:sanctum')->get('/users/{userId}/applications', [ApplicationController::class, 'getApplicationsByUser']); // Get applications by user
 Route::get('jobs/{jobId}/applications', [ApplicationController::class, 'getJobApplications']);
 Route::put('/applications/{id}/status', [ApplicationController::class, 'updateStatus']);

@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+.links a {
+    position: relative;
+}
+.links a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transition: translateX(-50%);
+    width: 0;
+    height: 3px;
+    transition: .3s;
+    background-color: red;
+}
+
+.links a:hover::before {
+    width: 10px;
+}

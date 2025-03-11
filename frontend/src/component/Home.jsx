@@ -21,7 +21,7 @@ const HomePage = () => {
   return (
     <div
       className="relative w-full h-screen bg-cover bg-center flex flex-col justify-center items-center text-white"
-      style={{ backgroundImage: `url(${Main})` }}
+      style={{ backgroundImage: `url()})` }}
     >
       <h1 className="text-4xl text-blue-500 font-bold text-center mb-6">
         {visibleWords.map((word, index) => (
@@ -42,8 +42,8 @@ const HomePage = () => {
         className="flex items-center  text-white px-6 py-3 rounded-lg text-lg font-semibold transition-transform transform hover:scale-105"
         aria-label="Go to application page"
       >
-        <span className="text-2xl">Let's Go to Apply</span>
-        <FaArrowRight className="ml-2 animate-bounce" />
+        <span className="text-2xl text-blue-400">Let's Go to Apply</span>
+        <FaArrowRight className="ml-2 text-blue-400 animate-bounce" />
       </Link>
     </div>
   );

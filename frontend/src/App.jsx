@@ -27,8 +27,9 @@ function App() {
         </>} />
         <Route path="/Firstpage" element={  <div 
       className="relative w-full min-h-screen bg-cover bg-center text-white" 
-      style={{ backgroundImage: `url(${bgpc})` }}
+      style={{ backgroundImage: `url()` }}
     >
+      <JobSearch />
       <AppInfo />
       <Page1 />
       <Footer />

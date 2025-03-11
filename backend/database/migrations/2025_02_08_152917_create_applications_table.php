@@ -12,14 +12,12 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Student
             $table->foreignId('job_id')->constrained()->onDelete('cascade'); // Job
             
-            // Personal Information
             $table->string('name');
             $table->string('prenom');
             $table->string('cin')->unique();
             $table->string('phone');
             $table->string('email');
             
-            // Additional Application Details
             $table->text('cover_letter')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('portfolio')->nullable();

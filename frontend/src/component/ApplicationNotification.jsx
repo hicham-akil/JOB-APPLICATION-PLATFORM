@@ -46,7 +46,7 @@ const ApplicationNotification = () => {
   return (
     <div className="fixed top-4 right-4">
       <button
-        className="relative bg-blue-500 text-white px-4 py-2 rounded-md shadow-md"
+        className="relative cursor-pointer duration-300 transition-all hover:bg-blue-300 bg-blue-500 text-white px-4 py-2 rounded-md shadow-md"
         onClick={handleClick} 
       >
         Applications

@@ -13,27 +13,29 @@ class Application extends Model
     protected $fillable = [
         'user_id',
         'job_id',
-        'resume',
-        'status',
         'name',
         'prenom',
         'cin',
         'phone',
         'email',
+        'resume',
         'cover_letter',
         'linkedin',
         'portfolio',
-        'expected_salary',
         'start_date',
+        'experience',
+        'education',
+       'skills',
+       'interview_availability',
+        'status',
+        'expected_salary',
     ];
 
-    // Relationship: An application belongs to a student (user)
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relationship: An application belongs to a job
     public function job(): BelongsTo
     {
         return $this->belongsTo(Job::class);

@@ -34,10 +34,11 @@ const JobSearch = () => {
             <input
                 type="text"
                 placeholder="Search for a job..."
+
                 value={query}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="border p-2 rounded-2xl w-full max-w-xs sm:max-w-md lg:max-w-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 placeholder:italic"
-            />
+            className="border border-gray-500 p-2 rounded-2xl w-full max-w-xs sm:max-w-md lg:max-w-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 placeholder:italic"
+/>
 
             {jobs.length > 0 && (
                 <ul className="absolute bg-gray-400 mt-25 z-1 border w-full max-w-xs sm:max-w-md lg:max-w-lg mt-1 rounded shadow-lg">

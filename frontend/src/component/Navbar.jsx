@@ -49,7 +49,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="text-2xl font-bold">
-              Inhicham
+              FIND
             </Link>
             <span>Loading...</span>
           </div>
@@ -60,19 +60,18 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-blue-200 text-white shadow-md">
+    <nav className="bg-white text-gray-900 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-3xl text-blue-300 font-bold">
-            Inhicham
+          <Link to="/" className="text-3xl text-blue-500 font-bold">
+            FIND
           </Link>
-          <JobSearch />
 
-          <div className="hidden md:flex space-x-6">
-            <Link to="/" className="hover:text-gray-300 text-xl">Home</Link>
-            <Link to="/profile" className=" text-xl hover:text-gray-300">Profile</Link>
-            <Link to="/signin" className=" text-xl hover:text-gray-300">Sign In</Link>
-            <Link to="/signup" className=" text-xl hover:text-gray-300">Sign Up</Link>
+          <div className="hidden links md:flex space-x-6">
+            <Link to="/" className="hover:text-gray-500 text-gray-900 font-semibold duration-300 transition-all ">Home</Link>
+            <Link to="/profile" className=" hover:text-gray-500 text-gray-900 font-semibold duration-300 transition-all">Profile</Link>
+            <Link to="/signin" className=" hover:text-gray-500 text-gray-900 font-semibold duration-300 transition-all">Sign In</Link>
+            <Link to="/signup" className=" hover:text-gray-500 text-gray-900 font-semibold duration-300 transition-all">Sign Up</Link>
           </div>
 
           {role === "company" && (

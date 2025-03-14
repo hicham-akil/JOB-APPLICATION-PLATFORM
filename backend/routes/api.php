@@ -8,7 +8,9 @@ use App\Http\Controllers\ProfileController;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'getProfile']);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Psy\CodeCleaner\FunctionContextPass;
 
 class AuthController extends Controller
 {
@@ -21,10 +22,10 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'password_confirmation' => 'required|string|same:password',
-            'role' => 'required|in:student,company', // validate the role
+            'role' => 'required|in:student,company', 
         ]);
 
-        // Create the user
+      
         $user = User::create($validated);
 
         return response()->json([
@@ -53,6 +54,14 @@ class AuthController extends Controller
             'token' => $user->createToken('YourAppName')->plainTextToken,
         ], 201);
     }
+    public function logout(Request $request) {
+        if ($request->user()) {
+            $request->user()->tokens()->delete();
+        }
+    
+        return response()->json(['message' => 'Déconnexion réussie'], 200);
+    }
+    
 }
 
 

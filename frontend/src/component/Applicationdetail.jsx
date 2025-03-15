@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import StatusChanger from "./StatusChanger"; 
+
 const Applicationdetail = () => {
     const [applications, setApplications] = useState([]);
     const { jobId } = useParams(); // Get the jobId from the URL
@@ -26,6 +27,7 @@ const Applicationdetail = () => {
 
         fetchApplications();
     }, [jobId]);
+
     const handleStatusUpdate = (id, newStatus) => {
         setApplications((prevApplications) =>
             prevApplications.map((app) =>
@@ -44,26 +46,19 @@ const Applicationdetail = () => {
                         <li key={application.id} className="border-b pb-4">
                             <h3 className="text-xl font-semibold">{application.name} {application.prenom}</h3>
                             <p className="text-gray-600">{application.email}</p>
-                            <div className="flex justify-between text-gray-500">
-                                <p><strong>Status:</strong> {application.status}</p>
-                                <p><strong>Applied On:</strong> {moment(application.created_at).format('LL')}</p>
-                            </div>
 
-                            <p><strong>Phone:</strong> {application.phone}</p>
+                            {/* Only showing the requested fields */}
+                            <p><strong>Name:</strong> {application.name}</p>
+                            <p><strong>Prenom:</strong> {application.prenom}</p>
+                            <p><strong>Email:</strong> {application.email}</p>
                             <p><strong>CIN:</strong> {application.cin}</p>
-                            <p><strong>LinkedIn:</strong> <a href={application.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{application.linkedin}</a></p>
-                            <p><strong>Portfolio:</strong> <a href={application.portfolio} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{application.portfolio}</a></p>
-                            <p><strong>Expected Salary:</strong> {application.expected_salary}</p>
-                            <p><strong>Start Date:</strong> {moment(application.start_date).format('LL')}</p>
+                            <p><strong>Phone:</strong> {application.phone}</p>
+                            <p><strong>Nationality:</strong> {application.nationality}</p>
+                            <p><strong>Expected Salary:</strong> {application.expectedSalary}</p>
+                            <p><strong>Start Date:</strong> {moment(application.startDate).format('LL')}</p>
                             <p><strong>Experience:</strong> {application.experience}</p>
                             <p><strong>Education:</strong> {application.education}</p>
                             <p><strong>Skills:</strong> {application.skills}</p>
-                            <p><strong>Interview Availability:</strong> {application.interview_availability}</p>
-                            <p><strong>Referral Source:</strong> {application.referral_source}</p>
-                            <p><strong>Relocate:</strong> {application.relocate ? 'Yes' : 'No'}</p>
-                            <p><strong>Languages:</strong> {application.languages}</p>
-                            <p><strong>GitHub:</strong> <a href={application.github} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{application.github}</a></p>
-                            <p><strong>Nationality:</strong> {application.nationality}</p>
 
                             {application.resume && (
                                 <a
@@ -75,12 +70,16 @@ const Applicationdetail = () => {
                                     View Resume
                                 </a>
                             )}
+                            <p><strong>Cover Letter:</strong> {application.coverLetter}</p>
+                            <p><strong>LinkedIn:</strong> <a href={application.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{application.linkedin}</a></p>
+                            <p><strong>GitHub:</strong> <a href={application.github} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{application.github}</a></p>
+                            <p><strong>Portfolio:</strong> <a href={application.portfolio} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{application.portfolio}</a></p>
 
-<StatusChanger
-applicationId={application.id}
-currentStatus={application.status}
-onUpdate={handleStatusUpdate}
-/>
+                            <StatusChanger
+                                applicationId={application.id}
+                                currentStatus={application.status}
+                                onUpdate={handleStatusUpdate}
+                            />
                         </li>
                     ))}
                 </ul>

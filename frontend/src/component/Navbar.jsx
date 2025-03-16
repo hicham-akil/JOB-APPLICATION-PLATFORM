@@ -91,7 +91,9 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
-            
+            <Link to={"/Contact"}>
+            Contact 
+            </Link>
           </div>
 
           {role === "company" && (

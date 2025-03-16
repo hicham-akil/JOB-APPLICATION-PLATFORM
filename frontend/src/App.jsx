@@ -15,6 +15,7 @@ import JobDetails from "./component/Showspjob";
 import HomePage from "./component/Home";
 import Footer from "./component/Footer";
 import bgpc from "./images/bagpc.jpeg";  
+import ContactUs from "./component/Contact";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
     </div>} />
 
         <Route path="/jobform" element={<JobForm />} />
+        <Route path="/Contact" element={<ContactUs/>} />
 
         <Route path="/jobs/:id" element={<JobDetails/>} />
         <Route path="/signin" element={<SignIn />} />

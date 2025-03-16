@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,5 @@ Route::get('/jobs/{jobId}/details', [ApplicationController::class, 'getJobDetail
 
 
 Route::post('conversations', [ConversationController::class, 'store']);
+Route::middleware('auth:sanctum')->post('/contact', [ContactController::class, 'store']);
+

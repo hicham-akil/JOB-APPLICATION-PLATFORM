@@ -69,8 +69,12 @@ export default function Navbar() {
         }
       )
       .then(() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("profilePicture");
+        localStorage.removeItem('token');
+  localStorage.removeItem('email');
+  localStorage.removeItem('role');
+  localStorage.removeItem('name');
+  localStorage.removeItem('prenom');
+  localStorage.removeItem('user_id');
         window.location.href = "/signin";
       })
       .catch((error) => {
@@ -80,7 +84,7 @@ export default function Navbar() {
   
 
   return (
-    <nav className="bg-white text-gray-900 shadow-md fixed w-full z-10">
+    <nav className="bg-white text-gray-900 shadow-md fixed w-full z-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link
@@ -91,14 +95,16 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
-            <Link to={"/Contact"}>
-            Contact 
-            </Link>
+          <Link to="/about-us" className="text-gray-900 hover:text-blue-600">About Us</Link>
+            <Link to="/help-center" className="text-gray-900 hover:text-blue-600">Help Center</Link>
+            <Link to="/Contact" className="text-gray-900 hover:text-blue-600">Contact</Link>
+          
+
           </div>
 
           {role === "company" && (
             <Link
-              to="/job-form"
+              to="/jobform"
               className="hover:text-gray-500 text-gray-900 font-semibold transition-colors"
             >
               Go to Job Form
@@ -113,7 +119,7 @@ export default function Navbar() {
                 src={profilePicture || OIP}
                 alt="Profile"
                 className="w-10 h-10 rounded-full border-2 border-white cursor-pointer hover:border-blue-500 transition-colors"
-                onClick={() => window.location.href = "/profile"} // Redirect to profile on image click
+                onClick={() => window.location.href = "/profile"}
               />
               <span
                 className="text-sm font-semibold cursor-pointer"
@@ -125,18 +131,23 @@ export default function Navbar() {
   <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg py-2 w-48">
     {!user && (
       <>
-        <Link to="/signin" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
-          Sign In
-        </Link>
         <Link to="/signup" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
           Sign Up
+        </Link>
+        <Link to="/signin" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
+          Sign In
         </Link>
       </>
     )}
     {user && (
+      <>
       <button onClick={handleLogout} className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors w-full text-left">
         Logout
       </button>
+        <Link to="/signin" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
+          Sign In
+        </Link>
+      </>
     )}
   </div>
 )}

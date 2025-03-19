@@ -16,6 +16,8 @@ import HomePage from "./component/Home";
 import Footer from "./component/Footer";
 import bgpc from "./images/bagpc.jpeg";  
 import ContactUs from "./component/Contact";
+import HelpCenter from "./component/HelpCenter";
+import AboutUs from "./component/AboutUs";
 
 function App() {
   return (
@@ -30,11 +32,16 @@ function App() {
       className="relative w-full min-h-screen bg-cover bg-center text-white" 
       style={{ backgroundImage: `url()` }}
     >
+      <br />
+      <br />
+      <br />
       <JobSearch />
       <AppInfo />
       <Page1 />
       <Footer />
     </div>} />
+    <Route path="/help-center" element={<HelpCenter />} />
+    <Route path="/about-us" element={<AboutUs />} />
 
         <Route path="/jobform" element={<JobForm />} />
         <Route path="/Contact" element={<ContactUs/>} />

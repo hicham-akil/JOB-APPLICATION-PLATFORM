@@ -4,7 +4,7 @@ return [
 
     'allowed_methods' => ['*'], // Allow all HTTP methods
 
-    'allowed_origins' => ['http://localhost:5173'], // Allow your frontend URL
+    'allowed_origins' => ['*'], // Allow your frontend URL
 
     'allowed_origins_patterns' => [],
 

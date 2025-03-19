@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 const ApplicationNotification = () => {
   const [acceptedCount, setAcceptedCount] = useState(0);
   const [rejectedCount, setRejectedCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchApplicationCounts = async () => {
@@ -40,18 +42,19 @@ const ApplicationNotification = () => {
   }, []);
 
   const handleClick = () => {
-    navigate("/applications"); 
+    navigate("/applications");
   };
 
   return (
     <div className="fixed top-4 right-4">
       <button
-        className="relative cursor-pointer duration-300 transition-all hover:bg-blue-300 bg-blue-500 text-white px-4 py-2 rounded-md shadow-md"
-        onClick={handleClick} 
+        className="relative cursor-pointer duration-300 transition-all bg-blue-500 text-white px-4 py-2 rounded-md shadow-md flex items-center"
+        onClick={handleClick}
       >
-        Applications
+        <FontAwesomeIcon icon={faBell} className="mr-2" />
+      
         {(acceptedCount > 0 || rejectedCount > 0) && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <span className="absolute -top-4 -right-2 text-red-700 text-xl font-bold px-2 py-1 rounded-full">
             {acceptedCount + rejectedCount}
           </span>
         )}

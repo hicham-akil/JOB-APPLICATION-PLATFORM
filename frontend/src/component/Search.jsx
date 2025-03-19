@@ -12,7 +12,6 @@ const JobSearch = () => {
         if (value.length > 0) {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/api/jobs/search?query=${value}`);
-               
                 setJobs(response.data);
             } catch (error) {
                 console.error("Error fetching jobs", error);
@@ -34,19 +33,18 @@ const JobSearch = () => {
             <input
                 type="text"
                 placeholder="Search for a job..."
-
                 value={query}
                 onChange={(e) => handleSearch(e.target.value)}
-            className="border border-gray-500 p-2 rounded-2xl w-full max-w-xs sm:max-w-md lg:max-w-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 placeholder:italic"
-/>
+                className="border border-gray-500 text-black p-2 rounded-2xl w-full max-w-xs sm:max-w-md lg:max-w-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 placeholder:italic"
+            />
 
             {jobs.length > 0 && (
-                <ul className="absolute bg-gray-400 mt-25 z-1 border w-full max-w-xs sm:max-w-md lg:max-w-lg mt-1 rounded shadow-lg">
+                <ul className="absolute bg-white mt-20 z-10 border w-full max-w-xs sm:max-w-md lg:max-w-lg rounded shadow-lg">
                     {jobs.map((job) => (
                         <li
                             key={job.id}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleSelectJob(job.id) }
+                            className="p-2 hover:bg-blue-100 text-black cursor-pointer"
+                            onClick={() => handleSelectJob(job.id)}
                         >
                             {job.title}
                         </li>

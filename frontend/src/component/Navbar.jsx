@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaEnvelope } from "react-icons/fa";
 import ApplicationNotification from "./ApplicationNotification";
 import JobSearch from "./Search";
-import OIP from "../images/oip.jpeg"; // Fallback profile picture
+import OIP from "../images/oip.jpeg"; 
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -34,7 +34,7 @@ export default function Navbar() {
           setProfilePicture(profilePicUrl);
           localStorage.setItem("profilePicture", profilePicUrl);
         } else {
-          setProfilePicture("/default-profile.png");
+          setProfilePicture(OIP);
         }
 
         setLoading(false);

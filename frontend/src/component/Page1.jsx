@@ -83,7 +83,7 @@ const Page1 = () => {
     }
 
     return (
-        <div className="min-h-screen p-6 flex items-center justify-center">
+        <div className=" p-6 flex items-center justify-center">
             {role === "student" ? (
                 <JobList jobs={jobs} userApplications={userApplications} />
             ) : role === "company" ? (

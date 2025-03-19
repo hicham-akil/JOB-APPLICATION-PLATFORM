@@ -28,8 +28,8 @@ const ApplicationNotification = () => {
           }
         );
 
-        setAcceptedCount(response.data.acceptedCount);
-        setRejectedCount(response.data.rejectedCount);
+        setAcceptedCount(response.data?.acceptedCount || 0);
+        setRejectedCount(response.data?.rejectedCount || 0);
       } catch (err) {
         console.error("Error fetching application counts:", err);
         setError("Failed to fetch application counts. Please try again later.");

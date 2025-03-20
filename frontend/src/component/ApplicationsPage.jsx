@@ -26,8 +26,8 @@ const ApplicationsPage = () => {
           }
         );
 
-        setAcceptedJobs(response.data.acceptedJobs);
-        setRejectedJobs(response.data.rejectedJobs);
+        setAcceptedJobs(Array.isArray(response.data.acceptedJobs) ? response.data.acceptedJobs : []);
+        setRejectedJobs(Array.isArray(response.data.rejectedJobs) ? response.data.rejectedJobs : []);
       } catch (err) {
         console.error("Error fetching applications:", err);
         setError("Failed to load applications. Please try again later.");
@@ -70,11 +70,11 @@ const ApplicationsPage = () => {
                     <strong>{job.title}</strong> -{" "}
                     <button
                       onClick={() =>
-                        navigate(`/company/${job.user.id}`)
+                        navigate(`/company/${job.user?.id}`)
                       }
                       className="text-blue-500 hover:underline"
                     >
-                      {job.user.name}
+                      {job.user?.name || "Unknown Company"}
                     </button>
                   </div>
                   <button
@@ -98,11 +98,11 @@ const ApplicationsPage = () => {
                   <strong>{job.title}</strong> -{" "}
                   <button
                     onClick={() =>
-                      navigate(`/company/${job.user.id}`)
+                      navigate(`/company/${job.user?.id}`)
                     }
                     className="text-blue-500 hover:underline"
                   >
-                    {job.user.name}
+                    {job.user?.name || "Unknown Company"}
                   </button>
                 </li>
               ))

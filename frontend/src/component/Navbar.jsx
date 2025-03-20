@@ -75,7 +75,7 @@ export default function Navbar() {
   localStorage.removeItem('name');
   localStorage.removeItem('prenom');
   localStorage.removeItem('user_id');
-        window.location.href = "/signin";
+        window.location.href = "/Signin";
       })
       .catch((error) => {
         console.error("Logout failed:", error);

@@ -29,6 +29,7 @@ const JobSearch = () => {
     
 
     return (
+    <div className="max-w-4xl mx-auto p-6 pt-20"> 
         <div className="p-4 relative flex justify-center items-center">
             <input
                 type="text"
@@ -36,7 +37,7 @@ const JobSearch = () => {
                 value={query}
                 onChange={(e) => handleSearch(e.target.value)}
                 className="border border-gray-500 text-black p-2 rounded-2xl w-full max-w-xs sm:max-w-md lg:max-w-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 placeholder:italic"
-            />
+                />
 
             {jobs.length > 0 && (
                 <ul className="absolute bg-white mt-20 z-10 border w-full max-w-xs sm:max-w-md lg:max-w-lg rounded shadow-lg">
@@ -52,6 +53,7 @@ const JobSearch = () => {
                 </ul>
             )}
         </div>
+            </div>
     );
 };
 

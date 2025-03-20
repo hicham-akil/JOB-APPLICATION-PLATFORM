@@ -6,7 +6,6 @@ const StatusChanger = ({ applicationId, currentStatus, onUpdate, jobPosterUserId
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState(""); 
 
-    // Get the logged-in user ID (applicant)
     const applicantUserId = localStorage.getItem("user_id"); 
 
     const handleStatusChange = async (newStatus) => {

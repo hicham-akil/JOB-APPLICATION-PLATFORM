@@ -1,29 +1,24 @@
 import { useState } from "react";
 
 export default function ContactUs() {
-  // Retrieve name, email, and token from localStorage
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
 
-  // Initialize the form data state
   const [formData, setFormData] = useState({
-    name: name || "",  // Default to empty string if localStorage doesn't have a name
-    email: email || "", // Default to empty string if localStorage doesn't have an email
+    name: name || "",  
+    email: email || "",
     subject: "",
     message: "",
   });
 
-  // Handle form input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if token exists in localStorage
     if (!token) {
       alert("You need to be logged in!");
       return;

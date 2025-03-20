@@ -6,8 +6,7 @@ import StatusChanger from "./StatusChanger";
 
 const Applicationdetail = () => {
     const [applications, setApplications] = useState([]);
-    const { jobId } = useParams(); // Get the jobId from the URL
-
+    const { jobId } = useParams(); 
     useEffect(() => {
         const fetchApplications = async () => {
             try {

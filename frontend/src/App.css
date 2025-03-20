@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-.links a {
+/* .links a {
     position: relative;
 }
 .links a::before {
@@ -17,4 +17,44 @@
 
 .links a:hover::before {
     width: 10px;
-}
+} */
+.Progressbar {
+    position: fixed;
+    top: 0;
+
+    width: 10px;
+    height: 10px;
+    background-color: bisque;
+    z-index: 999;
+    animation: progressbar  linear forwards;
+    animation-timeline: scroll();
+  }
+  
+  @keyframes progressbar {
+    0% {
+      width: 10px;
+      background-color: bisque;
+    }
+    20% {
+        width: 20%;
+        background-color: lightblue;
+    }
+    40% {
+        width: 40%;
+        background-color: lightblue;
+    }
+    60% {
+        width: 60%;
+        background-color: lightblue;
+    }
+    80% {
+        width: 80%;
+        background-color: blue;
+    }
+    100% {
+        width: 100%;
+
+        background-color: blue;
+    }
+  }
+  

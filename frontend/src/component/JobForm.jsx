@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
 
 const JobForm = () => {
     const [formData, setFormData] = useState({
@@ -58,54 +57,51 @@ const JobForm = () => {
     };
 
     return (
-        <motion.div
-            className="w-full h-screen flex justify-center items-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-        >
-            <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold text-center mb-4 text-blue-600">Post a Job</h2>
+        <div className="w-full h-screen flex justify-center items-center bg-gradient-to-r from-blue-200 to-blue-500">
+            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border-2 border-gray-100">
+                <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">Post a Job</h2>
 
-                <form onSubmit={handleSubmitJob} className="space-y-4">
+                <form onSubmit={handleSubmitJob} className="space-y-6">
                     {Object.keys(formData).map((key) => (
-                        <motion.input
-                            key={key}
-                            type={key === "salary" ? "number" : "text"}
-                            placeholder={key.replace("_", " ").toUpperCase()}
-                            name={key}
-                            value={formData[key]}
-                            onChange={handleChange}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        />
+                        <div key={key} className="space-y-2">
+                            <label
+                                htmlFor={key}
+                                className="text-sm font-medium text-gray-700"
+                            >
+                                {key.replace("_", " ").toUpperCase()}
+                            </label>
+                            <input
+                                type={key === "salary" ? "number" : "text"}
+                                id={key}
+                                placeholder={`Enter ${key.replace("_", " ")}`}
+                                name={key}
+                                value={formData[key]}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                required
+                            />
+                        </div>
                     ))}
-                    <motion.button
+
+                    <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.98 }}
+                        className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     >
                         Post Job
-                    </motion.button>
+                    </button>
                 </form>
 
                 {message && (
-                    <motion.p
-                        className={`text-center mt-4 ${
+                    <p
+                        className={`text-center mt-4 text-lg ${
                             message.includes("successfully") ? "text-green-500" : "text-red-500"
                         }`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
                     >
                         {message}
-                    </motion.p>
+                    </p>
                 )}
             </div>
-        </motion.div>
+        </div>
     );
 };
 

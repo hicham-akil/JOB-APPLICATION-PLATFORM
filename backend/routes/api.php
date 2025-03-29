@@ -44,5 +44,5 @@ Route::get('/jobs/{jobId}/details', [ApplicationController::class, 'getJobDetail
 
 
 Route::post('conversations', [ConversationController::class, 'store']);
-Route::middleware('auth:sanctum')->post('/contact', [ContactController::class, 'store']);
+// Route::middleware('auth:sanctum')->post('/contact', [ContactController::class, 'store']);
 

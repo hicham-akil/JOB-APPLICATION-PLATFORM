@@ -4,7 +4,6 @@ import axios from "axios";
 const StatusChanger = ({ applicationId, currentStatus, onUpdate, jobPosterUserId }) => {
     const [status, setStatus] = useState(currentStatus);
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState(""); 
 
     const applicantUserId = localStorage.getItem("user_id"); 
 
@@ -21,23 +20,7 @@ const StatusChanger = ({ applicationId, currentStatus, onUpdate, jobPosterUserId
                 }
             );
 
-            await axios.post(
-                `http://127.0.0.1:8000/api/conversations`,
-                {
-                    application_id: applicationId,
-                    applicant_user_id: applicantUserId, 
-                    company_user_id: jobPosterUserId,  
-                    message: message || `Your application status has been updated to: ${newStatus}`, },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
-            );
-
-            setStatus(newStatus);
-            setMessage("");  
-            onUpdate(applicationId, newStatus); 
+          
         } catch (error) {
             console.error("Error updating status or sending message:", error);
         }
@@ -60,18 +43,9 @@ const StatusChanger = ({ applicationId, currentStatus, onUpdate, jobPosterUserId
                 {loading && <span className="text-sm text-gray-500">Updating...</span>}
             </div>
 
-            <textarea
-                className="border p-2 rounded-md"
-                rows="4"
-                placeholder="Write a message to the applicant"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                disabled={loading}
-            />
 
             <button
                 onClick={() => handleStatusChange(status)}
-                disabled={loading || !message}
                 className="border p-2 rounded-md bg-blue-500 text-white"
             >
                 Send Status Update

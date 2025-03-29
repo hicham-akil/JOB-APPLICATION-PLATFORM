@@ -98,6 +98,9 @@ export default function Navbar() {
           <Link to="/about-us" className="text-gray-900 hover:text-blue-600">About Us</Link>
             <Link to="/help-center" className="text-gray-900 hover:text-blue-600">Help Center</Link>
             <Link to="/Contact" className="text-gray-900 hover:text-blue-600">Contact</Link>
+        <Link to="/signin" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
+          Sign In
+        </Link>
           
 
           </div>
@@ -133,9 +136,6 @@ export default function Navbar() {
       <>
         <Link to="/signup" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
           Sign Up
-        </Link>
-        <Link to="/signin" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
-          Sign In
         </Link>
       </>
     )}

@@ -12,19 +12,23 @@ use Illuminate\Support\Facades\Storage;
         public function store(Request $request)
 {
     $validated = $request->validate([
-        'job_id' => 'required|exists:jobs,id',
-        'user_id' => 'required|exists:users,id',
-        'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
-        'name' => 'required|string',
-        'prenom' => 'required|string',
-        'cin' => 'required|string',
-        'phone' => 'required|string',
-        'email' => 'required|email',
-        'cover_letter' => 'nullable|string',
-        'linkedin' => 'nullable|url',
-        'portfolio' => 'nullable|url',
-        'expected_salary' => 'nullable|numeric',
-        'start_date' => 'nullable|date',
+     'job_id' => 'required|exists:jobs,id',
+    'user_id' => 'required|exists:users,id',
+    'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
+    'name' => 'required|string',
+    'prenom' => 'required|string',
+    'cin' => 'required|string',
+    'phone' => 'required|string',
+    'email' => 'required|email',
+    'cover_letter' => 'nullable|string',
+    'linkedin' => 'nullable|url',
+    'portfolio' => 'nullable|url',
+    'expected_salary' => 'nullable|numeric',
+    'start_date' => 'nullable|date',
+    'nationality' => 'nullable|string',  // Add nationality
+    'experience' => 'nullable|string',    // Add experience
+    'education' => 'nullable|string',     // Add education
+    'skills' => 'nullable|string',   
     ]);
 
     $resumePath = $request->file('resume')->store('resumes', 'public');

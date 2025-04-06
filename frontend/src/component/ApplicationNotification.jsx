@@ -48,13 +48,14 @@ const ApplicationNotification = () => {
   return (
     <div className="fixed top-4 right-4">
       <button
-        className="relative cursor-pointer duration-300 transition-all bg-blue-500 text-white px-4 py-2 rounded-md shadow-md flex items-center"
+        className="relative flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg transition-all duration-300 
+        hover:bg-blue-600 focus:ring-2 focus:ring-blue-300"
         onClick={handleClick}
       >
-        <FontAwesomeIcon icon={faBell} className="mr-2" />
-      
+        <FontAwesomeIcon icon={faBell} className="text-xl" />
+
         {(acceptedCount > 0 || rejectedCount > 0) && (
-          <span className="absolute -top-4 -right-2 text-red-700 text-xl font-bold px-2 py-1 rounded-full">
+          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full animate-bounce">
             {acceptedCount + rejectedCount}
           </span>
         )}

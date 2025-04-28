@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'getProfile']);
     Route::post('/profile/update', [ProfileController::class, 'updateProfile']);
+    Route::post('/upload-resume', [ProfileController::class, 'uploadResume']);
 });
 
 Route::middleware('auth:sanctum')->get('/jobs', [DataController::class, 'index']); 
@@ -41,7 +42,6 @@ Route::middleware('auth:sanctum')->post('/applications/count', [ApplicationContr
 
 Route::middleware('auth:sanctum')->post('/applications/details', [ApplicationController::class, 'getUserApplications']);
 Route::get('/jobs/{jobId}/details', [ApplicationController::class, 'getJobDetails']);
-
 
 Route::post('conversations', [ConversationController::class, 'store']);
 // Route::middleware('auth:sanctum')->post('/contact', [ContactController::class, 'store']);

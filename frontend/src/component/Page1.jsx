@@ -105,7 +105,8 @@ const Page1 = () => {
                                     whileInView={{ opacity: 1 }}
                                     transition={{ duration: 2 }} 
                                 >
-                                    <h3 className="text-xl font-semibold mb-2">{job.title}</h3>
+                                <h3 className="text-xl font-semibold mb-2 text-gray-800">{job.title}</h3>
+
                                     <p className="text-gray-600 mb-4">{job.description}</p>
                                     <div className="flex justify-between text-gray-500 mb-4">
                                         <p><strong>Location:</strong> {job.location}</p>

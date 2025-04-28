@@ -1,11 +1,12 @@
-    import { useState, useEffect } from "react";
-    import axios from "axios";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-    export default function Profile() {
+export default function Profile() {
     const [user, setUser] = useState(null);
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [profilePicture, setProfilePicture] = useState(null);
+    const [resume, setResume] = useState(null); // Added state for resume
     const [preview, setPreview] = useState("");
     const [message, setMessage] = useState("");
 
@@ -21,14 +22,20 @@
               setBio(response.data.profile.bio || "");
               if (response.data.profile.profile_picture) {
                 const profilePicUrl = `http://127.0.0.1:8000/storage/${response.data.profile.profile_picture}`;
-                localStorage.setItem("profilePicture", profilePicUrl); 
+                localStorage.setItem("profilePicture", profilePicUrl);
                 setPreview(profilePicUrl);
+              }
+              if (response.data.profile.resume) {
+                const resumeUrl = `http://127.0.0.1:8000/storage/${response.data.profile.resume}`;
+                setResume(resumeUrl);
+                localStorage.setItem("resumeExists", "true"); 
+              } else {
+                localStorage.setItem("resumeExists", "false");
               }
             }
           })
           .catch((error) => console.error(error));
       }, []);
-      
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -70,51 +77,64 @@
     };
     
     return (
-        <div className="max-w-lg mx-auto  bg-white p-8 shadow-xl rounded-lg">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-6">Edit Profile</h2>
-        {message && <p className="text-green-600 mb-4">{message}</p>}
-        <form onSubmit={handleSubmit}>
-            <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-            />
-            </div>
-            <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
-            <textarea
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                rows="4"
-            />
-            </div>
-            <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
-            <input
-                type="file"
-                onChange={handleFileChange}
-                className="w-full text-sm text-gray-700 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            {preview && (
-                <img
-                src={preview}
-                alt="Profile Preview"
-                className="w-24 h-24 mt-4 rounded-full border-4 border-gray-200"
-                />
-            )}
-            </div>
-            <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-            Update Profile
-            </button>
-        </form>
+        <div className="max-w-lg mx-auto bg-white p-8 shadow-xl rounded-lg">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6">Edit Profile</h2>
+            {message && <p className="text-green-600 mb-4">{message}</p>}
+            <form onSubmit={handleSubmit}>
+                <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
+                </div>
+                <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+                    <textarea
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        rows="4"
+                    />
+                </div>
+                <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
+                    <input
+                        type="file"
+                        onChange={handleFileChange}
+                        className="w-full text-sm text-gray-700 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    {preview && (
+                        <img
+                            src={preview}
+                            alt="Profile Preview"
+                            className="w-24 h-24 mt-4 rounded-full border-4 border-gray-200"
+                        />
+                    )}
+                </div>
+                <button
+                    type="submit"
+                    className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                    Update Profile
+                </button>
+            </form>
+            {resume && (
+  <a
+    href={resume}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-500 underline block mt-4 text-center"
+  >
+    View Resume
+  </a>
+)}
+
+
+
         </div>
     );
-    }
+}

@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
+    prenom: '',
     age: '',
     role: 'student',
-    schoolOrCompanyName: '',
+    school_or_company_name: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -25,11 +25,11 @@ function SignUp() {
 
   const handleNext = (e) => {
     e.preventDefault();
-    if (step === 1 && (!formData.firstName || !formData.lastName)) {
+    if (step === 1 && (!formData.name || !formData.prenom)) {
       setError("First name and last name are required");
       return;
     }
-    if (step === 2 && (!formData.age || !formData.schoolOrCompanyName)) {
+    if (step === 2 && (!formData.age || !formData.school_or_company_name)) {
       setError("Age and school/company name are required");
       return;
     }
@@ -41,8 +41,9 @@ function SignUp() {
     e.preventDefault();
     setError('');
     setLoading(true);
+    console.log(formData)
 
-    if (!formData.firstName || !formData.lastName || !formData.age || !formData.schoolOrCompanyName || !formData.email || !formData.password || !formData.password_confirmation) {
+    if (!formData.name || !formData.prenom || !formData.age || !formData.school_or_company_name || !formData.email || !formData.password || !formData.password_confirmation) {
       setError("All fields are required!");
       setLoading(false);
       return;
@@ -69,7 +70,7 @@ function SignUp() {
             <div>
               <input
                 type="text"
-                name="firstName"
+                name="name"
                 placeholder="First Name"
                 onChange={handleChange}
                 required
@@ -79,7 +80,7 @@ function SignUp() {
             <div>
               <input
                 type="text"
-                name="lastName"
+                name="prenom"
                 placeholder="Last Name"
                 onChange={handleChange}
                 required
@@ -115,7 +116,7 @@ function SignUp() {
             <div>
               <input
                 type="text"
-                name="schoolOrCompanyName"
+                name="school_or_company_name"
                 placeholder={formData.role === 'student' ? "School Name" : "Company Name"}
                 onChange={handleChange}
                 required

@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaEnvelope } from "react-icons/fa";
 import ApplicationNotification from "./ApplicationNotification";
 import JobSearch from "./Search";
 import OIP from "../images/oip.jpeg"; 
-
 export default function Navbar() {
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState("");
   const [loading, setLoading] = useState(true);
   const [showDropdown, setShowDropdown] = useState(false);
   const role = localStorage.getItem("role");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const userId = localStorage.getItem("user_id");
 
@@ -75,7 +75,9 @@ export default function Navbar() {
   localStorage.removeItem('name');
   localStorage.removeItem('prenom');
   localStorage.removeItem('user_id');
-        window.location.href = "/Signin";
+  window.location.reload();
+
+  navigate("/signin");
       })
       .catch((error) => {
         console.error("Logout failed:", error);
@@ -100,6 +102,9 @@ export default function Navbar() {
             <Link to="/Contact" className="text-gray-900 hover:text-blue-600">Contact</Link>
         <Link to="/signin" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
           Sign In
+        </Link>
+        <Link to="/signup" className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors">
+          Sign Up
         </Link>
           
 

@@ -15,10 +15,10 @@ class AuthController extends Controller
     {
         // Validation
        $validated= $request->validate([
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
             'age' => 'required|integer',
-            'schoolOrCompanyName' => 'required|string|max:255',
+            'school_or_company_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'password_confirmation' => 'required|string|same:password',

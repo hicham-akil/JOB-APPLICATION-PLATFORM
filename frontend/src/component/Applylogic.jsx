@@ -29,11 +29,14 @@ const ApplyForm = ({ jobId }) => {
     const storedName = localStorage.getItem("name") || "";
     const storedPrenom = localStorage.getItem("prenom") || "";
     const storedEmail = localStorage.getItem("email") || "";
+    const storedresume = localStorage.getItem("resumeName") || "";
+    console.log(storedresume)
     setFormData((prev) => ({
       ...prev,
       name: storedName,
       prenom: storedPrenom,
       email: storedEmail,
+      resume:storedresume
     }));
   }, []);
 
@@ -128,7 +131,7 @@ const ApplyForm = ({ jobId }) => {
                 <div>
                   <h3 className="text-lg font-semibold mb-3 dark:text-white">Attachments & Links</h3>
                   <div className="space-y-3">
-                    <input type="file" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="input-field" />
+                    <input type="file" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="input-field" value={formData.resume} />
                     <textarea name="coverLetter" placeholder="Cover Letter" value={formData.coverLetter} onChange={handleChange} className="input-field"></textarea>
                     <input type="text" name="linkedin" placeholder="LinkedIn Profile" value={formData.linkedin} onChange={handleChange} className="input-field" />
                     <input type="text" name="github" placeholder="GitHub Profile" value={formData.github} onChange={handleChange} className="input-field" />

@@ -1,6 +1,5 @@
 import React from "react";
 import Applylogic from "./Applylogic";
-import { motion } from "framer-motion";
 import axios from "axios";
 
 const JobList = ({ jobs, userApplications = [] }) => {
@@ -11,14 +10,14 @@ const JobList = ({ jobs, userApplications = [] }) => {
     const deleteApply = async (jobId) => {
         try {
             const token = localStorage.getItem("token"); 
-    
+
             const resp = await axios.delete(`http://127.0.0.1:8000/api/applications/${jobId}/delete`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: "application/json",
                 }
             });
-    
+
             if (resp.status === 200) {
                 console.log("Application deleted successfully");
             } else {
@@ -34,44 +33,39 @@ const JobList = ({ jobs, userApplications = [] }) => {
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Available Jobs</h2>
             {jobs.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                 {jobs.map((job) => {
-    console.log(job.title); // move console.log OUTSIDE return
-    return (
-        <motion.div
-            key={job.id}
-            className="bg-gray-100 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 ease-in-out"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-        >
-            <h3 className="text-3xl font-extrabold mb-6 text-gray-900 text-center">{job.title}</h3>
+                    {jobs.map((job) => {
+                        return (
+                            <div
+                                key={job.id}
+                                className="bg-gray-100 rounded-lg shadow-lg p-6"
+                            >
+                                <h3 className="text-3xl font-extrabold mb-6 text-gray-900 text-center">{job.title}</h3>
 
-            <div className="space-y-4">
-                <p className="text-gray-700">{job.description}</p>
-                <div className="flex justify-between text-gray-600">
-                    <p><strong>Location:</strong> {job.location}</p>
-                    <p><strong>Type:</strong> {job.type}</p>
-                </div>
-                <p className="text-lg font-bold text-gray-800"><strong>Salary:</strong> ${job.salary}</p>
+                                <div className="space-y-4">
+                                    <p className="text-gray-700">{job.description}</p>
+                                    <div className="flex justify-between text-gray-600">
+                                        <p><strong>Location:</strong> {job.location}</p>
+                                        <p><strong>Type:</strong> {job.type}</p>
+                                    </div>
+                                    <p className="text-lg font-bold text-gray-800"><strong>Salary:</strong> ${job.salary}</p>
 
-                {isApplied(job.id) ? (
-                    <>
-                        <p className="text-green-500 font-semibold">✅ You have already applied for this job</p>
-                        <button 
-                            onClick={() => deleteApply(job.id)} 
-                            className="mt-4 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition"
-                        >
-                            Cancel Application
-                        </button>
-                    </>
-                ) : (
-                    <Applylogic jobId={job.id} />
-                )}
-            </div>
-        </motion.div>
-    );
-})}
-
+                                    {isApplied(job.id) ? (
+                                        <>
+                                            <p className="text-green-500 font-semibold">✅ You have already applied for this job</p>
+                                            <button 
+                                                onClick={() => deleteApply(job.id)} 
+                                                className="mt-4 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition"
+                                            >
+                                                Cancel Application
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <Applylogic jobId={job.id} />
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             ) : (
                 <p className="text-center text-gray-600">No job offers available.</p>

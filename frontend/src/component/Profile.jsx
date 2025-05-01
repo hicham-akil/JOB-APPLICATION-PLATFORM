@@ -29,7 +29,8 @@ export default function Profile() {
                 const resumeUrl = `http://127.0.0.1:8000/storage/resumes/${response.data.profile.resume}`;
                 setResume(resumeUrl);
                 localStorage.setItem("resumeExists", "true"); 
-              } else {
+                localStorage.setItem("resumeName", resume); 
+            } else {
                 localStorage.setItem("resumeExists", "false");
               }
             }

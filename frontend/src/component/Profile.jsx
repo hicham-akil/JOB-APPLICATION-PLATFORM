@@ -26,7 +26,7 @@ export default function Profile() {
                 setPreview(profilePicUrl);
               }
               if (response.data.profile.resume) {
-                const resumeUrl = `http://127.0.0.1:8000/storage/${response.data.profile.resume}`;
+                const resumeUrl = `http://127.0.0.1:8000/storage/resumes/${response.data.profile.resume}`;
                 setResume(resumeUrl);
                 localStorage.setItem("resumeExists", "true"); 
               } else {

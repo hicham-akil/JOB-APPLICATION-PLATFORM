@@ -69,6 +69,7 @@ const ApplyForm = ({ jobId }) => {
     applicationData.append("job_id", jobId);
 
     try {
+      console.log(formData.github)
       await axios.post("http://127.0.0.1:8000/api/applications", applicationData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

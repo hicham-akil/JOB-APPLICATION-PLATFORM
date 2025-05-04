@@ -36,7 +36,7 @@ use function Illuminate\Log\log;
                 'experience' => 'nullable|string',
                 'education' => 'nullable|string',
                 'skills' => 'nullable|string',
-                'github' => 'nullable|url',
+                'github' => 'required|nullable|url',
             ]);
         
             $profile = Profile::where('user_id', $request->input('user_id'))->first();

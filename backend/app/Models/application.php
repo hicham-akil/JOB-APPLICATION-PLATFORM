@@ -29,6 +29,7 @@ class Application extends Model
        'interview_availability',
         'status',
         'expected_salary',
+        'github',
     ];
 
     public function user(): BelongsTo

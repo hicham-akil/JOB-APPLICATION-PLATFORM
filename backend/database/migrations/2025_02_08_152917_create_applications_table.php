@@ -26,12 +26,12 @@ return new class extends Migration {
             $table->text('experience')->nullable();
             $table->text('education')->nullable();
             $table->string('skills')->nullable();
-            $table->string('interview_availability')->nullable();
+            // $table->string('interview_availability')->nullable();
             $table->string('referral_source')->nullable();
-            $table->boolean('relocate')->default(false);
-            $table->string('languages')->nullable();
+            // $table->boolean('relocate')->default(false);
+            // $table->string('languages')->nullable();
             $table->string('github')->nullable();
-            $table->string('nationality')->nullable();
+            // $table->string('nationality')->nullable();
 
             // Resume and Status
             $table->string('resume')->nullable();

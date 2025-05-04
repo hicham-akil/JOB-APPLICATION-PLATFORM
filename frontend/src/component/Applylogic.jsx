@@ -13,32 +13,31 @@ const ApplyForm = ({ jobId }) => {
     cin: "",
     phone: "",
     nationality: "",
-    expectedSalary: "",
-    startDate: "",
+    expected_salary: "",
+    start_date: "",
     experience: "",
     education: "",
     skills: "",
     resume: null,
-    coverLetter: "",
+    cover_letter: "",
     linkedin: "",
     github: "",
     portfolio: "",
   });
 
+  const storedName = localStorage.getItem("name") || "";
+  const storedPrenom = localStorage.getItem("prenom") || "";
+  const storedEmail = localStorage.getItem("email") || "";
+  const storedresume = localStorage.getItem("resumeName") || "";
+
   useEffect(() => {
-    const storedName = localStorage.getItem("name") || "";
-    const storedPrenom = localStorage.getItem("prenom") || "";
-    const storedEmail = localStorage.getItem("email") || "";
-    const storedresume = localStorage.getItem("resumeName") || "";
-    console.log(storedresume)
     setFormData((prev) => ({
       ...prev,
       name: storedName,
       prenom: storedPrenom,
       email: storedEmail,
-      resume:storedresume
     }));
-  }, []);
+  }, [storedName, storedPrenom, storedEmail]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -60,7 +59,11 @@ const ApplyForm = ({ jobId }) => {
 
     const applicationData = new FormData();
     Object.keys(formData).forEach((key) => {
-      applicationData.append(key, formData[key]);
+      if (formData[key] !== null && formData[key] !== "") {
+        applicationData.append(key, formData[key]);
+      } else {
+        applicationData.append(key, "");  // Handling empty fields
+      }
     });
     applicationData.append("user_id", userId);
     applicationData.append("job_id", jobId);
@@ -118,8 +121,8 @@ const ApplyForm = ({ jobId }) => {
                 <div>
                   <h3 className="text-lg font-semibold mb-3 dark:text-white">Job Details</h3>
                   <div className="space-y-3">
-                    <input type="text" name="expectedSalary" placeholder="Expected Salary" value={formData.expectedSalary} onChange={handleChange} className="input-field" />
-                    <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} className="input-field" />
+                    <input type="text" name="expected_salary" placeholder="Expected Salary" value={formData.expected_salary} onChange={handleChange} className="input-field" />
+                    <input type="date" name="start_date" value={formData.start_date} onChange={handleChange} className="input-field" />
                     <textarea name="experience" placeholder="Experience" value={formData.experience} onChange={handleChange} className="input-field"></textarea>
                     <textarea name="education" placeholder="Education" value={formData.education} onChange={handleChange} className="input-field"></textarea>
                     <input type="text" name="skills" placeholder="Skills (comma separated)" value={formData.skills} onChange={handleChange} className="input-field" />
@@ -131,8 +134,10 @@ const ApplyForm = ({ jobId }) => {
                 <div>
                   <h3 className="text-lg font-semibold mb-3 dark:text-white">Attachments & Links</h3>
                   <div className="space-y-3">
-                    <input type="file" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="input-field" value={formData.resume} />
-                    <textarea name="coverLetter" placeholder="Cover Letter" value={formData.coverLetter} onChange={handleChange} className="input-field"></textarea>
+                    {storedresume && (
+                      <p className="text-sm text-gray-600 dark:text-gray-300">Previously uploaded resume: {storedresume}</p>
+                    )}
+                    <textarea name="cover_letter" placeholder="Cover Letter" value={formData.cover_letter} onChange={handleChange} className="input-field"></textarea>
                     <input type="text" name="linkedin" placeholder="LinkedIn Profile" value={formData.linkedin} onChange={handleChange} className="input-field" />
                     <input type="text" name="github" placeholder="GitHub Profile" value={formData.github} onChange={handleChange} className="input-field" />
                     <input type="text" name="portfolio" placeholder="Portfolio URL" value={formData.portfolio} onChange={handleChange} className="input-field" />
@@ -156,7 +161,6 @@ const ApplyForm = ({ jobId }) => {
                 </div>
               )}
 
-              {/* Navigation Buttons */}
               <div className="flex justify-between mt-6">
                 {step > 1 && (
                   <button
@@ -179,7 +183,6 @@ const ApplyForm = ({ jobId }) => {
               </div>
             </form>
 
-            {/* Close Modal Button */}
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-white"

@@ -29,14 +29,15 @@ export default function Profile() {
                 const resumeUrl = `http://127.0.0.1:8000/storage/resumes/${response.data.profile.resume}`;
                 setResume(resumeUrl);
                 localStorage.setItem("resumeExists", "true"); 
-                localStorage.setItem("resumeName", resume); 
+                localStorage.setItem("resumeName", resumeUrl); 
+                console.log(resumeUrl)
             } else {
                 localStorage.setItem("resumeExists", "false");
               }
             }
           })
           .catch((error) => console.error(error));
-      }, []);
+      },[]);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];

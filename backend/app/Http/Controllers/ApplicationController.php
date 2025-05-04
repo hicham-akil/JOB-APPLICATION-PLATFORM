@@ -4,39 +4,49 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\job_detail;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+
+use function Illuminate\Log\log;
+
  class ApplicationController extends Controller
     {
         public function store(Request $request)
-{
-    $validated = $request->validate([
-     'job_id' => 'required|exists:jobs,id',
-    'user_id' => 'required|exists:users,id',
-    'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
-    'name' => 'required|string',
-    'prenom' => 'required|string',
-    'cin' => 'required|string',
-    'phone' => 'required|string',
-    'email' => 'required|email',
-    'cover_letter' => 'nullable|string',
-    'linkedin' => 'nullable|url',
-    'portfolio' => 'nullable|url',
-    'expected_salary' => 'nullable|numeric',
-    'start_date' => 'nullable|date',
-    'nationality' => 'nullable|string',  // Add nationality
-    'experience' => 'nullable|string',    // Add experience
-    'education' => 'nullable|string',     // Add education
-    'skills' => 'nullable|string',   
-    ]);
-
-    $resumePath = $request->file('resume')->store('resumes', 'public');
-
-    $application = Application::create(array_merge($validated, ['resume' => $resumePath]));
-
-    return response()->json(['message' => 'Application submitted successfully!', 'application' => $application], 201);
-}
+        {
+            // Log the incoming request
+            Log::info('Request Data:', $request->all());
+        
+            $validated = $request->validate([
+                'job_id' => 'required|exists:jobs,id',
+                'user_id' => 'required|exists:users,id',
+                'name' => 'required|string',
+                'prenom' => 'required|string',
+                'cin' => 'required|string',
+                'phone' => 'required|string',
+                'email' => 'required|email',
+                'cover_letter' => 'nullable|string',
+                'linkedin' => 'nullable|url',
+                'portfolio' => 'nullable|url',
+                'expected_salary' => 'nullable|numeric',
+                'start_date' => 'nullable|date',
+                'nationality' => 'nullable|string',
+                'experience' => 'nullable|string',
+                'education' => 'nullable|string',
+                'skills' => 'nullable|string',
+                'github' => 'nullable|url',
+            ]);
+        
+            $profile = Profile::where('user_id', $request->input('user_id'))->first();
+            $validated['resume'] = $profile->resume;
+        
+            $application = Application::create($validated);
+        
+            return response()->json(['message' => 'Application submitted successfully!', 'application' => $application], 201);
+        }
+        
 public function deleteaply($jobId)
 {
     try {

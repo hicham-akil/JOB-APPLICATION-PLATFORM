@@ -113,15 +113,24 @@ class DataController extends Controller
     $job->delete();
     return response()->json(['message' => 'Job deleted successfully']);
 }
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    $location = $request->input('location');
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
+    $jobs = Job::query();
 
-        $jobs = Job::where('title', 'like', "%{$query}%")->get();
-
-        return response()->json($jobs);
+    if (!empty($query)) {
+        $jobs->where('title', 'like', "%{$query}%");
     }
+
+    if (!empty($location)) {
+        $jobs->where('location', 'like', "%{$location}%");
+    }
+
+    return response()->json($jobs->get());
+}
+
 
     public function show($id)
     {

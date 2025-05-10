@@ -148,8 +148,18 @@ public function filterByLocation($location)
     }
     
 
-
+    public function getLocations()
+    {
+        $locations = Job::select('location')
+            ->distinct()
+            ->orderBy('location')
+            ->pluck('location');
+    
+        return response()->json($locations);
+    }
+    
     
     }
+    
 
     

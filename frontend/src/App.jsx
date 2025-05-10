@@ -19,7 +19,6 @@ import ContactUs from "./component/Contact";
 import HelpCenter from "./component/HelpCenter";
 import AboutUs from "./component/AboutUs";
 import AddResume from "./component/Addresume";
-import Filter from "./component/Filter";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -56,7 +55,6 @@ console.log(resumeExists)
               element={
                 <div className="relative w-full min-h-screen bg-cover bg-center text-white">
                   <JobSearch />
-                  <Filter/>
                   <AppInfo />
                   <Page1 />
                   {!resumeExists && <AddResume />}

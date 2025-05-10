@@ -130,7 +130,11 @@ public function search(Request $request)
 
     return response()->json($jobs->get());
 }
-
+public function filterByLocation($location)
+{
+    $jobs = Job::where('location', 'LIKE', '%' . $location . '%')->get();
+    return response()->json($jobs);
+}
 
     public function show($id)
     {
@@ -147,3 +151,5 @@ public function search(Request $request)
 
     
     }
+
+    

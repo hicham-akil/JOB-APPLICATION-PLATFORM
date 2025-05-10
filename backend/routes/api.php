@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->get('/jobs', [DataController::class, 'index']); 
 Route::get('/jobs/search', [DataController::class, 'search']);
+Route::get('/jobs/location/{location}', [DataController::class, 'filterByLocation']);
+
 Route::get('/jobs/{id}', [DataController::class, 'show']);
 Route::get('/companies/{companyId}/jobs', [DataController::class, 'getCompanyJobs']);
 Route::middleware('auth:sanctum')->post('/jobs', [DataController::class, 'store']); 

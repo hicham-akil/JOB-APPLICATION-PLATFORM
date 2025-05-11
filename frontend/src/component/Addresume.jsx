@@ -50,7 +50,6 @@ const AddResume = () => {
         Add Resume
       </button>
 
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg w-96">
@@ -60,7 +59,7 @@ const AddResume = () => {
                 type="file"
                 accept=".pdf,.doc,.docx"
                 onChange={handleFileChange}
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="text-black mb-5 m-r10 border border-gray-300 rounded"
               />
               <div className="flex justify-between items-center">
                 <button

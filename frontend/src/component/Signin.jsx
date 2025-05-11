@@ -38,8 +38,8 @@ function SignIn() {
       localStorage.setItem('prenom', prenom);
       const userId = response.data.user.id;
       localStorage.setItem('user_id', userId);
-  window.location.reload();
-      navigate("/");
+      navigate("/Firstpage");
+      // window.location.reload();
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid credentials');
     } finally {

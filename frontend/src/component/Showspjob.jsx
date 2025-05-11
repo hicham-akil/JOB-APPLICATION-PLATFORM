@@ -34,7 +34,7 @@ const JobDetail = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 pt-20"> 
+    <div className="max-w-4xl relative left-[5%] mx-auto p-6 pt-20"> 
     <motion.div
     className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-16"
     initial={{ opacity: 0, y: 20 }}

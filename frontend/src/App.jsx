@@ -22,9 +22,10 @@ import AddResume from "./component/Addresume";
 
 function App() {
   const token = localStorage.getItem("token");
-
-  const resumeExists = localStorage.getItem("resume") === "true";
-console.log(resumeExists)
+  const resumeExists = localStorage.getItem("resumeExists") === "true";
+  setTimeout(() => {  
+  console.log(resumeExists)
+  }, 1000);
   return (
     <>
       <div className="Progressbar"></div>
